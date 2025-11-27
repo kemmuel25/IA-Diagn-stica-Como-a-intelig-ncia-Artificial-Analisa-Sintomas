@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analisador de Sintomas</title>
+
+    <!-- Tailwind via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- CSS customizado -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="bg-zinc-900 text-gray-100 min-h-screen flex items-center justify-center p-4">
+    <div class="w-full max-w-xl bg-zinc-800 rounded-2xl shadow-xl p-6 border border-zinc-700">
+
+        <h1 class="text-3xl font-bold mb-4 text-indigo-300">
+            Analisador de Sintomas 🧬
+        </h1>
+
+        <p class="text-gray-300 mb-4">
+            Digite seus sintomas e o sistema tentará identificá-los de forma <span class="text-indigo-400 font-semibold">educativa</span>.
+        </p>
+
+        <textarea id="inputSintomas"
+            class="w-full h-32 p-3 rounded-lg bg-zinc-900 border border-zinc-700 focus:border-indigo-400 outline-none"
+            placeholder="Ex: febre, dor de cabeça, náusea..."
+        ></textarea>
+
+        <button onclick="analisar()"
+            class="w-full mt-4 py-3 rounded-lg bg-indigo-600 hover:bg-indigo-700 transition font-semibold">
+            Analisar
+        </button>
+
+        <div id="resultado" class="mt-6 hidden p-4 rounded-xl bg-zinc-700"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
