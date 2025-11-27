@@ -1,8 +1,14 @@
-/* Suavizar transições do tema */
+/* Ajustes suaves para dar personalidade ao tema dark */
+
 body {
-    transition: background-color 0.4s ease, color 0.4s ease;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu;
 }
 
-textarea, #resultado {
-    transition: background-color 0.4s ease, color 0.4s ease;
+#resultado {
+    animation: fadeIn 0.28s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(6px); }
+    to   { opacity: 1; transform: translateY(0); }
 }
