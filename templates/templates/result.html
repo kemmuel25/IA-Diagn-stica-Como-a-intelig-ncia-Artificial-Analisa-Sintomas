@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <title>Resultado — IA Diagnóstica</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <style>
+    body{font-family:Arial,Helvetica,sans-serif;max-width:900px;margin:16px auto;padding:8px}
+    .card{border:1px solid #ddd;padding:12px;border-radius:6px;margin:8px 0}
+    .urgent{color:#b00000;font-weight:700}
+    .muted{color:#555;font-size:0.9em}
+  </style>
+</head>
+<body>
+  <a href="/">← Nova análise</a>
+  <h1>Resultado (educacional)</h1>
+  <p class="muted">Gerado em {{data.timestamp}} — <strong>não é diagnóstico médico</strong></p>
+
+  <div class="card">
+    <h3>Sintomas informados</h3>
+    <ul>
+      {% for s in data.selected_symptoms %}
+        <li>{{ labels[s] }}</li>
+      {% endfor %}
+    </ul>
+    <p><strong>Nível de atenção:</strong> <span class="urgent">{{ data.triage }}</span></p>
+  </div>
+
+  {% if data.suggestions %}
+  <div class="card">
+    <h3>Hipóteses (educacional)</h3>
+    <ol>
+      {% for s in data.suggestions %}
+        <li><strong>{{ s.name }}</strong> — confiança aproximada {{ s.confidence }}.<br>{{ s.explanation }}</li>
+      {% endfor %}
+    </ol>
+  </div>
+  {% endif %}
+
+  <div class="card">
+    <h3>Recomendações gerais</h3>
+    <ul>
+      {% for r in data.recommendations %}
+        <li>{{ r }}</li>
+      {% endfor %}
+    </ul>
+  </div>
+
+  <div class="card muted">
+    <h4>Como a IA (educativa) processou os dados</h4>
+    <ol>
+      <li>Coleta dos sintomas (entrada)</li>
+      <li>Organização e comparação com padrões</li>
+      <li>Cálculo de sobreposição / confiança</li>
+      <li>Classificação de urgência por regras</li>
+      <li>Geração de recomendações gerais</li>
+    </ol>
+  </div>
+</body>
+</html>
