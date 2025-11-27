@@ -7,6 +7,7 @@
     <!-- Tailwind CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
 
+    <!-- Config Tailwind -->
     <script>
         tailwind.config = {
             darkMode: 'class',
@@ -20,11 +21,8 @@
         }
     </script>
 
-    <style>
-        body {
-            transition: background 0.4s ease, color 0.4s ease;
-        }
-    </style>
+    <!-- Estilo próprio -->
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body class="bg-gray-900 text-gray-100 min-h-screen p-5">
@@ -34,7 +32,7 @@
         <div class="flex justify-between items-center mb-6">
             <h1 class="text-3xl font-bold text-primary">IA Diagnóstica (Educacional)</h1>
 
-            <!-- Botão tema claro/escuro -->
+            <!-- Botão para trocar tema -->
             <button id="themeToggle" 
                 class="px-3 py-1 bg-primary text-white rounded-lg hover:opacity-90">
                 Alternar Tema
@@ -62,7 +60,6 @@
     </div>
 
     <script>
-        // Função principal da “IA educacional”
         function analisar() {
             const texto = document.getElementById("inputSintomas").value.toLowerCase().trim();
             const box = document.getElementById("resultado");
@@ -112,11 +109,11 @@
             `;
         }
 
-        // Alternar tema dark/light
+        // Alternar tema
         document.getElementById("themeToggle").addEventListener("click", () => {
             document.documentElement.classList.toggle("dark");
 
-            // Trocar fundo pra tema claro
+            // ajustar fundo ao modo claro
             if (document.documentElement.classList.contains("dark")) {
                 document.body.classList.add("bg-gray-900", "text-gray-100");
                 document.body.classList.remove("bg-gray-100", "text-gray-900");
