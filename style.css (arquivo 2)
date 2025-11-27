@@ -1,0 +1,8 @@
+/* Suavizar transições do tema */
+body {
+    transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+textarea, #resultado {
+    transition: background-color 0.4s ease, color 0.4s ease;
+}
