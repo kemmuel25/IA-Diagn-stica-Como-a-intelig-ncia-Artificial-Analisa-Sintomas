@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <title>IA Diagnóstica — Simulador Educativo</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <style>
+    body{font-family:Arial,Helvetica,sans-serif;max-width:900px;margin:16px auto;padding:8px}
+    header{background:#f7f7f7;padding:12px;border-radius:6px}
+    fieldset{margin:12px 0;padding:12px}
+    .warning{background:#fff3cd;padding:10px;border-radius:6px;color:#665200}
+    button{padding:8px 14px;border-radius:6px}
+  </style>
+</head>
+<body>
+  <header>
+    <h1>IA Diagnóstica — Simulador Educativo (Versão X)</h1>
+    <p class="warning"><strong>Aviso:</strong> Este projeto é educativo e não fornece diagnóstico médico.</p>
+  </header>
+
+  <form method="post" action="/analyze">
+    <fieldset>
+      <legend>Marque os sintomas:</legend>
+      {% for key, label in symptoms %}
+        <label><input type="checkbox" name="symptom" value="{{key}}"> {{label}}</label><br>
+      {% endfor %}
+    </fieldset>
+
+    <!-- Campos opcionais (desativados por simplicidade); descomente se quiser usar
+    <fieldset>
+      <legend>Tempo / Intensidade (opcional)</legend>
+      <label>Há quantos dias? <input name="duration" type="number" min="0" max="365"></label><br>
+      <label>Intensidade (1-5) <input name="intensity" type="number" min="1" max="5"></label><br>
+    </fieldset>
+    -->
+
+    <button type="submit">Analisar</button>
+  </form>
+
+  <footer style="margin-top:18px;font-size:0.9em;color:#444">
+    <p>Exemplo educacional: QR code -> formulário -> este simulador. Não substitui médico.</p>
+  </footer>
+</body>
+</html>
