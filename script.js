@@ -1,6 +1,5 @@
 function analisar() {
     let texto = document.getElementById("inputSintomas").value.toLowerCase().trim();
-
     const box = document.getElementById("resultado");
 
     if (!texto) {
@@ -9,12 +8,12 @@ function analisar() {
         return;
     }
 
-    // Normaliza acentos: náusea → nausea ; vômito → vomito
+    // Normaliza acentos (ex: náusea → nausea)
     texto = texto.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 
     let resposta = "Os sintomas não correspondem a nenhum padrão simples do sistema.";
 
-    // Regras modernas e expandidas
+    // Regras expandidas e modernas
     const regras = [
         {
             cond: texto.includes("febre") && (texto.includes("dor") || texto.includes("cabeca")),
@@ -29,7 +28,7 @@ function analisar() {
             msg: "Pode indicar desconforto gastrointestinal."
         },
         {
-            cond: texto.includes("falta de ar") || texto.includes("falta de ar") || texto.includes("respirar"),
+            cond: texto.includes("falta de ar") || texto.includes("dificuldade para respirar") || texto.includes("respirar"),
             msg: "Sinal que merece atenção imediata — procure atendimento."
         },
         {
@@ -46,7 +45,7 @@ function analisar() {
         }
     ];
 
-    // Executa regras
+    // Verifica regras
     for (let r of regras) {
         if (r.cond) {
             resposta = r.msg;
@@ -54,7 +53,7 @@ function analisar() {
         }
     }
 
-    // Saída
+    // Exibe resultado
     box.classList.remove("hidden");
     box.innerHTML = `
         <h2 class="text-xl font-bold mb-2 text-indigo-300">Resultado</h2>
