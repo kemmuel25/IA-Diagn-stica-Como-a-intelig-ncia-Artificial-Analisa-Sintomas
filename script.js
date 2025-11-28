@@ -1,57 +1,35 @@
-console.log("SCRIPT CARREGADO!");
 function analisar() {
+    console.log("👉 Função analisar() foi chamada!");
 
-    console.log("Função analisar foi chamada!");
+    let txt = document.getElementById("inputSintomas");
+    console.log("Elemento textarea encontrado?", txt);
 
-    let texto = document.getElementById("inputSintomas").value.toLowerCase().trim();
-    console.log("Texto digitado antes da normalização:", texto);
+    let texto = txt.value;
+    console.log("Texto original digitado:", texto);
 
-    if (!texto) {
-        mostrar("Digite algum sintoma antes.", "text-red-300");
+    if (!texto.trim()) {
+        mostrar("⚠ Digite algum sintoma.", "text-red-300");
         return;
     }
 
-    // Normaliza acentos
-    texto = texto.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-    console.log("Texto depois da normalização:", texto);
+    // Normalizar
+    texto = texto.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+    console.log("Texto normalizado:", texto);
 
-    // Mensagem padrão
-    let resposta = "Os sintomas não correspondem a nenhum padrão simples do sistema.";
+    let resposta = "Os sintomas não correspondem a nenhum padrão simples.";
 
-    // Regras modernizadas
+    if (texto.includes("febre")) console.log("🎯 Detectou: FEBRE");
+    if (texto.includes("dor")) console.log("🎯 Detectou: DOR");
+    if (texto.includes("nausea")) console.log("🎯 Detectou: NAUSEA");
+    if (texto.includes("vomito")) console.log("🎯 Detectou: VOMITO");
+
     const regras = [
-        {
-            cond: texto.includes("febre") && 
-                  (texto.includes("dor") || texto.includes("cabeca")),
-            msg: "Pode sugerir um quadro infeccioso leve."
-        },
-        {
-            cond: texto.includes("tosse") && texto.includes("catarro"),
-            msg: "Pode indicar inflamação ou irritação respiratória."
-        },
-        {
-            cond: texto.includes("nausea") || texto.includes("vomito"),
-            msg: "Possível desconforto gastrointestinal."
-        },
-        {
-            cond: texto.includes("falta de ar") || texto.includes("dor no peito"),
-            msg: "Atenção: sintomas que merecem avaliação imediata."
-        },
-        {
-            cond: texto.includes("tontura") || texto.includes("vertigem"),
-            msg: "Pode estar relacionado a queda de pressão ou desequilíbrio momentâneo."
-        },
-        {
-            cond: texto.includes("calafrio") || texto.includes("calafrios"),
-            msg: "Calafrios podem acompanhar quadros febris."
-        },
-        {
-            cond: texto.includes("diarreia"),
-            msg: "Pode indicar irritação intestinal ou sensibilidade alimentar."
-        }
+        { cond: texto.includes("febre") && texto.includes("dor"), msg: "Quadro infeccioso leve." },
+        { cond: texto.includes("tosse") && texto.includes("catarro"), msg: "Irritação respiratória." },
+        { cond: texto.includes("nausea") || texto.includes("vomito"), msg: "Possível desconforto gastrointestinal." },
+        { cond: texto.includes("falta de ar") || texto.includes("dor no peito"), msg: "Atenção imediata recomendada." }
     ];
 
-    // Detecta a primeira regra que encaixa
     for (let r of regras) {
         if (r.cond) {
             resposta = r.msg;
@@ -60,12 +38,8 @@ function analisar() {
     }
 
     mostrar(`
-        <h2 class="text-xl font-bold mb-2 text-indigo-300">Resultado</h2>
-        <p class="text-gray-100"><strong>Sintomas:</strong> ${texto}</p>
-        <p class="text-gray-100"><strong>Interpretação:</strong> ${resposta}</p>
-        <p class="mt-3 text-yellow-300 text-sm">
-            *Este sistema é apenas educativo e não substitui avaliação profissional.*
-        </p>
+        <strong>Sintomas:</strong> ${texto}<br>
+        <strong>Interpretação:</strong> ${resposta}
     `);
 }
 
