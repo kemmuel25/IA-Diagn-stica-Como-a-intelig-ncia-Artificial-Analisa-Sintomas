@@ -1,3 +1,4 @@
+console.log("SCRIPT CARREGADO!");
 function analisar() {
 
     console.log("Função analisar foi chamada!");
